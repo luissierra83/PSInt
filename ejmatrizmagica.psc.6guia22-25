@@ -1,0 +1,93 @@
+Algoritmo matrizMagica
+	
+	Definir x, f, c Como Entero
+	
+	Hacer
+		Escribir "Ingrese las Filas de la matriz mqagica"
+		leer f
+		
+		Escribir "Ingrese las columnas de la matriz magica"
+		leer c
+		
+		si f<>c Entonces
+			Escribir "Para hacer una matriz magica los lados tienen que ser iguales"
+		SiNo
+			si f=c y f*c>10 Entonces
+				Escribir "Para la matriz magica, ingrese valores no mayores a 10."
+			FinSi
+		FinSi
+	Mientras Que f<>c o f*c>10 
+	
+	Dimension x[f,c]
+	
+	rellenar(x,f,c)
+	
+	validar(x,f)
+	
+FinAlgoritmo
+
+
+SubProceso rellenar(x,f,c)
+	Definir i, j, n Como Entero
+	
+	para i=0 hasta f-1 Hacer
+		para j=0 hasta c-1 Hacer
+			Escribir "Ingrese el valor " i ", " j
+			Leer n
+			Mientras n<1 y n>9 Hacer
+				Escribir "El valor ingresado es incorrecto favor introducir un valor entre 1 y 9"
+				leer n
+				si n>=1 y n<=9 Entonces
+					Escribir "El valor del elemento " i ", " j " es: " n
+				FinSi
+			FinMientras
+			x[i,j]=n
+		FinPara
+	FinPara
+	
+FinSubProceso
+
+
+SubProceso  validar(x, f)
+	Definir i, j, Diag, Diag2, fSum, cSum Como Entero
+	Definir v Como Logico
+	
+	v = Verdadero
+	
+	Diag = 0
+	Diag2 = 0
+
+	Para i = 0 Hasta f-1
+		Diag = Diag + x[i, i]
+		Diag2 = Diag2 + x[i, (f - 1) - i]
+	FinPara
+	
+	v=Diag=Diag2
+	
+	i=0 
+	
+	Mientras i<f
+		fSum=0
+		cSum=0
+		para j=0 hasta f-1 Hacer
+			fSum=fSum+x[i,j]
+			cSum=cSum+x[j,i]
+		FinPara
+		v= fSum=cSum y fSum=Diag
+		i=i+1
+	FinMientras
+	
+	si v=Verdadero Entonces
+		para i=0 hasta f-1 Hacer
+			para j=0 hasta f-1 Hacer
+				Escribir Sin Saltar x[i,j] " "
+			FinPara
+			Escribir ""
+		FinPara
+		Escribir "Es una matriz magica y la suma es: " Diag
+		
+	SiNo
+		Escribir "No es una matriz magica"
+	FinSi
+	
+FinSubProceso
